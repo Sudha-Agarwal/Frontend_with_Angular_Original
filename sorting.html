@@ -1,0 +1,9 @@
+fetch('http://localhost:3000/posts?_sort=title&_order=asc')
+  .then(response => response.json())
+  .then(data => {
+    // Process and display the sorted data
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });

@@ -1,0 +1,42 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Post 1"
+    },
+    {
+      "id": 2,
+      "title": "Post 2"
+    },
+    {
+      "id": 3,
+      "title": "Post 3"
+    }
+  ],
+  "employees": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "position": "Software Engineer"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "position": "UI Designer"
+    },
+    {
+      "id": 3,
+      "name": "Bob Johnson",
+      "position": "Product Manager"
+    },
+    {
+      "id": 4,
+      "name": "John Doe1",
+      "position": "Software Engineer"
+    },
+    {
+      "id": 5,
+      "name": "Updated Employee Name"
+    }
+  ]
+}

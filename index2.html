@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Table from JSON Data</title>
+</head>
+<body>
+    <h1>Dynamic Table from JSON Data</h1>
+    <table id="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table content will be generated here -->
+        </tbody>
+    </table>
+
+    <script>
+        // JSON data (example)
+        const jsonData = [
+            { "id": 1, "name": "John Doe", "email": "john@example.com" },
+            { "id": 2, "name": "Jane Smith", "email": "jane@example.com" },
+            { "id": 3, "name": "Bob Johnson", "email": "bob@example.com" }
+        ];
+
+        // Function to generate the table from JSON data
+        function generateTable(data) {
+            const tableBody = document.querySelector("#data-table tbody");
+
+            data.forEach(item => {
+                const row = tableBody.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                const cell3 = row.insertCell(2);
+
+                cell1.textContent = item.id;
+                cell2.textContent = item.name;
+                cell3.textContent = item.email;
+            });
+        }
+
+        // Call the function to generate the table
+        generateTable(jsonData);
+    </script>
+</body>
+</html>

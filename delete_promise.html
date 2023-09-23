@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="align">JavaScript’s Fetch API</h1>
+    <h2 class="align">PUT method</h2>
+
+    <button onclick="deleteData()">Click to Delete</button>
+
+    <script>
+        function deleteData(){
+            // Employee ID to be deleted
+const employeeIdToDelete = 6; // Replace with the actual ID of the employee to delete
+
+// URL of the JSON API
+const apiUrl = "http://localhost:3000/employees";
+
+// DELETE request using the Fetch API
+fetch(`${apiUrl}/${employeeIdToDelete}`, {
+  method: "DELETE",
+})
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json(); // If you expect a response, parse the JSON response
+  })
+  .then((deletedEmployee) => {
+   alert("Employee deleted successfully:", deletedEmployee);
+  })
+  .catch((error) => {
+    console.error("Error deleting employee:", error);
+  });
+        }
+
+    </script>
+</body>
+</html>

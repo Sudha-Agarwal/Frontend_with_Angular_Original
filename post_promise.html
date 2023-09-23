@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1 class="align">JavaScript’s Fetch API</h1>
+ <h2 class="align">POST method</h2>
+    
+
+    <script>
+
+        function postData(){
+            // Employee data to be updated
+const employeeData = {
+  id: 6, // Assuming you have an employee ID
+  name: "New Employee Name",
+  position:"Fresher"
+  // Add other fields you want to update here
+};
+
+// URL of the JSON API
+const apiUrl = "http://localhost:3000/employees";
+
+// Headers for the PUT request
+const headers = {
+  "Content-Type": "application/json",
+};
+
+// PUT request using the Fetch API
+fetch(`${apiUrl}`, {
+  method: "POST",
+  headers: headers,
+  body: JSON.stringify(employeeData),
+})
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json(); // Parse the response JSON if needed
+  })
+  .then((updatedEmployee) => {
+    console.log("Employee updated successfully:", updatedEmployee);
+  })
+  .catch((error) => {
+    console.error("Error updating employee:", error);
+  });
+
+
+        }
+
+        postData();
+        
+    </script>
+</body>
+</html>
