@@ -1,0 +1,35 @@
+.in-stock {
+    background-color: green;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;    
+  }
+
+  .out-of-stock{
+    background-color: grey;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;    
+
+  }
+  .card{
+    width:50%;
+    margin:auto;
+  }
+
+  .red{
+    color:red;
+  }
+
+  .size20{
+    font-size: 20px;
+  }
+
+  .active{
+    color:blue;
+  }
+
+  .inactive{
+    color:grey;
+  }
+  

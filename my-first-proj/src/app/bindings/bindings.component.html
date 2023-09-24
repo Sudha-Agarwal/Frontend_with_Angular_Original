@@ -1,0 +1,29 @@
+<p>bindings works!</p>
+
+<button [disabled]="buttonDisabled">Click me</button>
+<img [src] = "imgPath">
+
+<!-- Class Binding-->
+<div [className]="'red'">Test</div>
+<div [className]="'red size20'">Test</div>
+
+<div [class.active]="isActive">Some content here</div>
+
+<div [class.active]="isActive" [class.inactive]="!isActive">Some content here</div>
+
+<div [className]="cssStringVar">Test</div>
+
+<div [className]="hasError() ? 'red' : 'size20'"> conditional operator </div>
+
+<div class="card" *ngFor="let product of products">
+    <div class="card-header">{{ product.name }}</div>
+    <div class="card-body">
+      <p>{{ product.description }}</p>
+      <p>Price: {{ product.price }}</p>
+    </div>
+    <div class="card-footer">
+      <div [ngClass]="{'in-stock': isProductInStock(product), 'out-of-stock': !isProductInStock(product)}">
+        {{ isProductInStock(product) ? 'In Stock' : 'Out of Stock' }}
+      </div>
+    </div>
+  </div>
