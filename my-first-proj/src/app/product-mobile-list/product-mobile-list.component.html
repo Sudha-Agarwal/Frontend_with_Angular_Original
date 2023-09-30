@@ -9,15 +9,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products">
+        <tr *ngFor="let product of matchingProducts">
           <td>{{ product.id }}</td>
           <td>{{ product.name }}</td>
           <td>{{ product.description }}</td>
           <td>
-            <a [routerLink]="['../products-list',product.id]">Edit</a>
+            <button (click)="showDetails(product)">Edit</button>
             <a [routerLink]="['../mobile-list',product.id]">View</a>
             <button (click)="deleteProduct(product.id)">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
+
+    <div *ngIf="showEditProduct">
+    <h3>Details</h3>
+<app-edit-product [product]="selectedProduct" (productChange)="update($event)"></app-edit-product>
+</div>

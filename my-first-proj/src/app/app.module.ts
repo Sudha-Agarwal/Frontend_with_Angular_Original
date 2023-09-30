@@ -11,6 +11,12 @@ import { ProductLaptopListComponent } from './product-laptop-list/product-laptop
 import { LoginFormComponent } from './login-form/login-form.component';
 import { ModelFormComponent } from './model-form/model-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PipesComponent } from './pipes/pipes.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ParentComponent } from './parent/parent.component';
+import { ChildComponent } from './child/child.component';
+import { ObservableComponent } from './observable/observable.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +27,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProductMobileDetailsComponent,
     ProductLaptopListComponent,
     LoginFormComponent,
-    ModelFormComponent
+    ModelFormComponent,
+    PipesComponent,
+    EditProductComponent,
+    ParentComponent,
+    ChildComponent,
+    ObservableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

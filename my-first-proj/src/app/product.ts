@@ -2,6 +2,6 @@ export class Product {
     id: number;
     name: string;
     description: string;
-    type:string;
+    category:string;
     // add other properties as needed
   }

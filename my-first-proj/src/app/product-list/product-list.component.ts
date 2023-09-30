@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent {
+  categories:string[] = ['mobile','laptop','furniture'];
+
 
 }

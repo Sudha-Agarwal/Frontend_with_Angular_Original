@@ -7,6 +7,7 @@ import { ProductMobileDetailsComponent } from './product-mobile-details/product-
 import { ProductLaptopListComponent } from './product-laptop-list/product-laptop-list.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { ModelFormComponent } from './model-form/model-form.component';
+import { PipesComponent } from './pipes/pipes.component';
 
 const routes: Routes = [
   {
@@ -21,10 +22,12 @@ const routes: Routes = [
       },
       {path:'mobile-list/:id', component: ProductMobileDetailsComponent},
       { path: 'laptop-list', component: ProductLaptopListComponent },
+      { path: 'furniture-list', component: ProductLaptopListComponent },
     ]
   },
   {path: 'login-form', component:LoginFormComponent},
-  {path: 'model-form', component:ModelFormComponent}
+  {path: 'model-form', component:ModelFormComponent},
+  {path: 'pipes', component: PipesComponent}
 ];
 
 

@@ -1,8 +1,12 @@
 <div>
-    <a routerLink="mobile-list">Mobiles&nbsp;</a>
+    <!--<a routerLink="mobile-list">Mobiles&nbsp;</a>
     <a [routerLink]="['laptop-list']" [queryParams]="{ category: 'electronics' }">Laptops</a>
-    
-    
+    -->
+    <ul>
+        <li *ngFor="let category of categories">
+          <a [routerLink]="[category + '-list']" [queryParams]="{ category: category }">{{ category }}</a>
+        </li>
+      </ul>
     </div>
     
     <router-outlet></router-outlet>

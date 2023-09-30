@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-mobile-list',
@@ -7,11 +8,29 @@ import { Product } from '../product';
   styleUrls: ['./product-mobile-list.component.css']
 })
 export class ProductMobileListComponent implements OnInit{
+  category:string = '';
+  matchingProducts:Product[];
+  selectedProduct:Product = new Product();
+  showEditProduct:boolean = false;
+
+  showDetails(product:Product) {
+    this.selectedProduct=Object.assign({},product)
+    this.showEditProduct = true;
+  }
   
+  update(product:Product) {
+    console.log(product);
+    var target=this.products.find(e => e.id==product.id)
+    Object.assign(target,product);
+    this.showEditProduct = false;
+    alert("Product Saved");
+  }
+  constructor(private route: ActivatedRoute) {}
+
   products: Product[] = [
-    { id: 1, name: 'Product 1', description: 'Description 1' ,type:"Mobile"},
-    { id: 2, name: 'Product 2', description: 'Description 2' ,type:"Mobile"},
-    { id: 3, name: 'Product 3', description: 'Description 3' ,type:"Laptop"},
+    { id: 1, name: 'Product 1', description: 'Description 1' ,category:"mobile"},
+    { id: 2, name: 'Product 2', description: 'Description 2' ,category:"mobile"},
+    { id: 3, name: 'Product 3', description: 'Description 3' ,category:"laptop"},
   ];
 
   ngOnInit(): void {
@@ -20,6 +39,13 @@ export class ProductMobileListComponent implements OnInit{
     .subscribe(products => {this.products = products;
     this.lastId = this.products[this.products.length-1].id});
     this.createForm();   */
+
+        // Subscribe to the paramMap observable to get the query parameter value
+    this.route.queryParams.subscribe((params) => {
+      this.category = params['category'];
+      this.matchingProducts = this.products.filter(product => product.category === this.category);
+    });
+ 
 
     
   }
