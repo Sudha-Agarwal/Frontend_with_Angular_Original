@@ -1,0 +1,13 @@
+.link-button {
+    background: none;
+    border: none;
+    color: blue; /* Set the color to the desired link color */
+    text-decoration: underline;
+    cursor: pointer; /* Show a pointer cursor on hover to mimic link behavior */
+    padding: 0; /* Remove padding to reduce button size */
+  }
+  
+  .link-button:hover {
+    color: darkblue; /* Change color on hover for visual feedback */
+  }
+  

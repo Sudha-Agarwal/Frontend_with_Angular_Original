@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-mobile-list',
@@ -25,7 +25,7 @@ export class ProductMobileListComponent implements OnInit{
     this.showEditProduct = false;
     alert("Product Saved");
   }
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute,private router: Router) {}
 
   products: Product[] = [
     { id: 1, name: 'Product 1', description: 'Description 1' ,category:"mobile"},
@@ -78,6 +78,10 @@ export class ProductMobileListComponent implements OnInit{
 
   toggleForm() {
     /*this.showForm = !this.showForm;*/
+  }
+
+  navigateToProducts() {
+    this.router.navigate(['/products-list']);
   }
 
 }

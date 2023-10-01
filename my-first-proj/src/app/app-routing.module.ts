@@ -8,12 +8,15 @@ import { ProductLaptopListComponent } from './product-laptop-list/product-laptop
 import { LoginFormComponent } from './login-form/login-form.component';
 import { ModelFormComponent } from './model-form/model-form.component';
 import { PipesComponent } from './pipes/pipes.component';
+import { AllProductsListComponent } from './all-products-list/all-products-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
      path: '',  redirectTo: '/courses', pathMatch: 'full' 
   },
   { path: 'bindings', component: BindingsComponent}, 
+  { path: 'products', component:AllProductsListComponent},
   { 
     path: 'products-list', 
     children: [
@@ -27,8 +30,22 @@ const routes: Routes = [
   },
   {path: 'login-form', component:LoginFormComponent},
   {path: 'model-form', component:ModelFormComponent},
+  {path: 'pipes', component: PipesComponent},
+  {path: '**', component:PageNotFoundComponent}
+];
+
+
+const routes1: Routes = [
+  {
+     path: '',  redirectTo: '/courses', pathMatch: 'full' 
+  },
+  { path: 'bindings', component: BindingsComponent}, 
+  { path: 'products', component:AllProductsListComponent},
+  {path: 'login-form', component:LoginFormComponent},
+  {path: 'model-form', component:ModelFormComponent},
   {path: 'pipes', component: PipesComponent}
 ];
+
 
 
 @NgModule({

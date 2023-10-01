@@ -12,9 +12,26 @@
         <tr *ngFor="let product of products">
           <td>{{ product.id }}</td>
           <td>{{ product.name }}</td>
-          <td>{{ product.description }}</td>          
-        </tr>
+          <td>{{ product.description }}</td> 
+          <td>
+          <button class="link-button" (click)="showDetails(product)">Edit</button>
+            <a [routerLink]="['../mobile-list',product.id]">View</a>
+            <button (click)="deleteProduct(product.id)">Delete</button>         
+        </td>
+          </tr>
       </tbody>
     </table>
+
+    <button (click) = "showAddForm()">Add</button>
+
+    <div *ngIf="showEditProduct">
+      <h3>Details</h3>
+  <app-edit-product [product]="selectedProduct" (productChange)="update($event)"></app-edit-product>
+  </div>
+
+  <div *ngIf="showAddProduct">
+    <h3>Add a Product</h3>
+<app-add-product  (productAdded)="add($event)"></app-add-product>
+</div>
 
     

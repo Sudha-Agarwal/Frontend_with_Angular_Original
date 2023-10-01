@@ -17,6 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './child/child.component';
 import { ObservableComponent } from './observable/observable.component';
+import { AllProductsListComponent } from './all-products-list/all-products-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AddProductComponent } from './add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { ObservableComponent } from './observable/observable.component';
     EditProductComponent,
     ParentComponent,
     ChildComponent,
-    ObservableComponent
+    ObservableComponent,
+    AllProductsListComponent,
+    PageNotFoundComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
