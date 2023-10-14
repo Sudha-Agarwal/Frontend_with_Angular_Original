@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DataService } from '../_services/data.service';
+import { User } from '../_models/user';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-model-form',
@@ -8,7 +11,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class ModelFormComponent {
   emailPattern = '^[a-zA-z0-9._]+@[a-zA-z0-9.-]+\\.[a-z]{2,4}$';
-
+user:User;
 
 
   RegisterationForm = new FormGroup({
@@ -23,14 +26,23 @@ export class ModelFormComponent {
     return this.RegisterationForm.controls;
   }
 
-  constructor() { }
+  constructor(private ds:DataService, private router:Router) { }
 
   ngOnInit(): void {
   }
 
   submit(){
     console.table(this.RegisterationForm.value);
-    
+    const { firstName, lastName, email, password } = this.RegisterationForm.value;
+    // Create a new User instance
+    const userToAdd = new User(firstName, lastName, email, password);
+    this.ds.createNewUser(userToAdd)
+    .subscribe({
+      next:(response:any)=>{
+        alert(response.message);
+      this.router.navigate(['/login-form'])},
+      error:err=>alert(err)
+    })    
   }
 
   emailDomainValidator(control:FormControl){

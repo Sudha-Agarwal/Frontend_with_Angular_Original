@@ -1,13 +1,33 @@
-<div>
-    <!--<a routerLink="mobile-list">Mobiles&nbsp;</a>
-    <a [routerLink]="['laptop-list']" [queryParams]="{ category: 'electronics' }">Laptops</a>
-    -->
-    <ul>
-        <li *ngFor="let category of categories">
-          <a [routerLink]= "['/products']" [queryParams]="{ category: category }" >{{ category }}</a>
-        </li>
-      </ul>
-    </div>
+<button (click)="navigateToProducts()">Go to Products</button>
+
+<h2>Product List</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>
+            <button (click)="showDetails(product)">Edit1</button>
+            <a [routerLink]="['/product-detail',product.id]">View</a>
+            <button (click)="deleteProduct(product.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="showEditProduct">
+    <h3>Details</h3>
+<app-edit-product [product]="selectedProduct" (productChange)="update($event)"></app-edit-product>
+</div>
     
    
 

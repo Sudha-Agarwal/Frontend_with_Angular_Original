@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Product } from '../product';
-import { ProductService } from '../product.service';
+import { Product } from '../_models/product';
+import { ProductService } from '../_services/product.service';
 
 @Component({
   selector: 'app-edit-product',

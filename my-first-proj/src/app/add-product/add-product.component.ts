@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Product } from '../product';
-import { ProductService } from '../product.service';
+import { Product } from '../_models/product';
+import { ProductService } from '../_services/product.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -29,10 +29,10 @@ export class AddProductComponent implements OnInit{
   onSubmit(){
     this.product = this.productForm.value;
     this.productService.addProduct(this.product).subscribe({
-      next:data=>{alert("product added")
+      next:(data:any)=>{alert("product added")
       this.productAdded.emit(data);
     },
-      error:err=>console.log(err)      
+      error:(err:any)=>console.log(err)      
     });
   
     

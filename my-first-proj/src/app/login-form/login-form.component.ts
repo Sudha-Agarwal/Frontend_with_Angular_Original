@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { DataService } from '../_services/data.service'
+import { Router } from '@angular/router';
+import { SharedDataService } from '../_services/shared-data.service';
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-login-form',
@@ -6,18 +10,30 @@ import { Component } from '@angular/core';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent {
-  user = {email:'',password:'',username:'', rememberMe: false};
- 
+  user:User = {email:'',password:''};
 
-  constructor() { }
+  constructor(private ds:DataService, 
+    private router: Router,
+    private sharedDataService:SharedDataService) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(){
-  alert("form submitted");
-    console.log(this.user);
- 
+  onSubmit(){  
+    this.ds.checkLogin(this.user).subscribe({
+      next:(response:any)=>{       
+        if(response.token){
+          alert(response.message);
+        this.sharedDataService.LoggedIn(true);
+        this.ds.setToken(response.token);
+        //this.sharedDataService.login();
+        this.router.navigate(['./bindings']);
+
+        }
+        
+      },
+      error:(err:any)=>alert(err)
+    })
    
   }
 

@@ -20,6 +20,7 @@ import { ObservableComponent } from './observable/observable.component';
 import { AllProductsListComponent } from './all-products-list/all-products-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AddProductComponent } from './add-product/add-product.component';
     ObservableComponent,
     AllProductsListComponent,
     PageNotFoundComponent,
-    AddProductComponent
+    AddProductComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,

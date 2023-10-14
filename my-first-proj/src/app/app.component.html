@@ -1,3 +1,55 @@
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" [routerLink]="'/bindings'" [routerLinkActive]="['active-link']">Bindings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"[routerLink]="'/courses'" [routerLinkActive]="['active-link']">Courses</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" >
+              Products
+            </a>
+            <ul class="dropdown-menu">
+                <li *ngFor="let item of dropdownItems">
+                    <a class="dropdown-item" [routerLink]="item.routerLink" [queryParams]="item.queryParams">{{ item.text }}</a>
+                  </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" >Disabled</a>
+          </li>          
+        </ul>
+        <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+          <ul class="navbar-nav ml-lg-auto ml-0 d-flex flex-row mt-lg-0 mt-2">
+            <li class="nav-item">
+                
+                <a *ngIf = "isLoggedOut" class="btn btn-primary mx-2" routerLink="/login-form" [routerLinkActive]="['active-link']">Login</a> 
+                <button *ngIf = "isLoggedIn" (click)="logout()" class="btn btn-primary mx-2" >Logout</button>                               
+              </li>               
+              <li class="nav-item">
+                <a class="btn btn-primary" routerLink="/model-form" [routerLinkActive]="['active-link']">SignUp</a>
+                
+              </li> 
+
+
+          </ul>
+       
+       
+       
+      </div>
+    </div>
+  </nav>
+
 <a [routerLink]="'/bindings'" id="s1" [routerLinkActive]="['active-link']">Bindings&nbsp;</a>
 <a [routerLink]="'/courses'" [routerLinkActive]="['active-link']">Courses&nbsp;</a>
 <a [routerLink]="'/products-list'" [routerLinkActive]="['active-link']">Products&nbsp;</a>

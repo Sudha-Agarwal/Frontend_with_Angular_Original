@@ -1,8 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 
 const app = express();
+const secretKey = '1234';
 const port = 3000; // You can change this to any port you prefer
 
 // Enable CORS for all routes (adjust the options as needed for your environment)
@@ -16,7 +18,82 @@ const products = [
   { id: 2, name: 'Product 2', description: 'Description 2' ,category:"mobile"},
   { id: 3, name: 'Product 3', description: 'Description 3' ,category:"laptop"},
   { id: 4, name: 'Product 4', description: 'Description 3',category: 'furniture' },
+  { id: 4, name: 'Product 1', description: 'Description 1' ,category:"mobile"},
+  { id: 6, name: 'Product 2', description: 'Description 2' ,category:"mobile"},
+  { id: 7, name: 'Product 3', description: 'Description 3' ,category:"laptop"},
+  { id: 8, name: 'Product 4', description: 'Description 3',category: 'furniture' },
+  { id: 9, name: 'Product 1', description: 'Description 1' ,category:"laptop"},
+  { id: 10, name: 'Product 2', description: 'Description 2' ,category:"laptop"},
+  { id: 11, name: 'Product 3', description: 'Description 3' ,category:"laptop"},
+  { id: 12, name: 'Product 4', description: 'Description 3',category: 'laptop' },
+  { id: 13, name: 'Product 1', description: 'Description 1' ,category:"laptop"},
+  { id: 14, name: 'Product 2', description: 'Description 2' ,category:"laptop"},
+  { id: 15, name: 'Product 3', description: 'Description 3' ,category:"laptop"},
+  { id: 16, name: 'Product 4', description: 'Description 3',category: 'laptop' },
+  { id: 17, name: 'Product 4', description: 'Description 3',category: 'laptop' },
 ];
+
+class User{
+  firstName;
+  lastName;
+  email;
+  password;
+
+  constructor(firstName, lastName, email, password){
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.password = password;
+  }
+}
+
+const users = [];
+
+
+app.post('/createUser', (req, res) => {
+  const { firstName, lastName, email, password } = req.body;
+
+  // Create a new user with the provided data
+  //const user = user.find((user) => user.username === username && user.password === password);
+  const newUser = new User(firstName,lastName,email,password);
+  users.push(newUser);
+  res.status(200).json({ message: 'User registered successfully' });
+ });
+
+
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+
+  // Find the user with the provided credentials
+  const user = users.find((user) => user.email === email && user.password === password);
+
+  if (user) {
+    // Create a payload object with user data
+    const payload = {
+      email: user.email // Include user-specific data as needed
+     
+    };
+    const token = jwt.sign(payload, secretKey);    
+    res.status(200).json({ message: 'Login successful', token:token });
+  } else {
+    res.status(401).json({ message: 'Invalid credentials' });
+  }
+});
+
+// Middleware for authentication
+app.use((req, res, next) => {
+  const token = req.header('Authorization');
+  console.log(token);
+  if (!token) return res.status(401).send('Access denied. No token provided.');
+
+  try {
+    const decoded = jwt.verify(token, secretKey);
+    req.user = decoded;
+    next();
+  } catch (ex) {
+    res.status(400).send('Invalid token.');
+  }
+});
 
 // Route to get products by category
 app.get('/products', (req, res) => {
@@ -33,6 +110,32 @@ app.get('/products', (req, res) => {
     // If there are matching products, respond with a 200 OK status code
     res.status(200).json(filteredProducts);
   }
+});
+
+app.get('/products/pagination', (req, res) => {
+  const page = parseInt(req.query.page);
+  const pageSize = parseInt(req.query.pageSize);
+
+  const startIndex = (page - 1) * pageSize;
+  const endIndex = page * pageSize;
+
+  const category = req.query.category;
+  const filteredProducts = products.filter(product => product.category === category);
+  
+
+  const paginatedItems = filteredProducts.slice(startIndex, endIndex);
+  res.json(paginatedItems);
+});
+
+app.get('/products/pagination/items', (req, res) => {
+  
+  const category = req.query.category;
+  const filteredProducts = products.filter(product => product.category === category);
+  
+  const totalItems = filteredProducts.length;
+
+  console.log(filteredProducts.length);
+  res.json({totalItems});
 });
 
 app.put('/products', (req, res) => {
@@ -70,7 +173,10 @@ app.post('/products', (req, res) => {
   return res.status(201).json(newProduct); // Respond with the added product
 });
 
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
+
+

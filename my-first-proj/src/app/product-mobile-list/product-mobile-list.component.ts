@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../product';
+import { Product } from '../_models/product';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -13,6 +13,9 @@ export class ProductMobileListComponent implements OnInit{
   selectedProduct:Product = new Product();
   showEditProduct:boolean = false;
 
+  constructor(private route: ActivatedRoute,
+    private router: Router) {}
+
   showDetails(product:Product) {
     this.selectedProduct=Object.assign({},product)
     this.showEditProduct = true;
@@ -25,7 +28,7 @@ export class ProductMobileListComponent implements OnInit{
     this.showEditProduct = false;
     alert("Product Saved");
   }
-  constructor(private route: ActivatedRoute,private router: Router) {}
+  
 
   products: Product[] = [
     { id: 1, name: 'Product 1', description: 'Description 1' ,category:"mobile"},

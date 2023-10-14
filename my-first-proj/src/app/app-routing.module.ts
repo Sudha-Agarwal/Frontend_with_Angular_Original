@@ -10,6 +10,7 @@ import { ModelFormComponent } from './model-form/model-form.component';
 import { PipesComponent } from './pipes/pipes.component';
 import { AllProductsListComponent } from './all-products-list/all-products-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
   },
   { path: 'bindings', component: BindingsComponent}, 
   { path: 'products', component:AllProductsListComponent},
+  {path: 'product-detail/:id', component:ProductDetailComponent},
   { 
     path: 'products-list', 
     children: [
