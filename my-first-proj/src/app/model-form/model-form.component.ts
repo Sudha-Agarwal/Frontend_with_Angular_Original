@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { DataService } from '../_services/data.service';
 import { User } from '../_models/user';
 import { Route, Router } from '@angular/router';
@@ -18,7 +18,7 @@ user:User;
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
     email: new FormControl('',[Validators.required, 
-      Validators.pattern(this.emailPattern)]),
+      Validators.pattern(this.emailPattern),emailDomainValidator]),
     password: new FormControl('',[Validators.required, Validators.minLength(6)])
   });
 
@@ -60,4 +60,19 @@ user:User;
     return null;
   }
 
+}
+
+export function emailDomainValidator(control: AbstractControl): ValidationErrors | null{
+  let email = control.value;
+  if(email && email.indexOf("@")!=-1){
+    let[_,domain] = email.split("@");
+    if(domain !== "gmail.com"){
+      return{
+        emailDomain:{
+          parseDomain:domain
+        }
+      }
+    }
+  }
+  return null;
 }

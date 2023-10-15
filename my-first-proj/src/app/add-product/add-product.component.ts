@@ -28,6 +28,7 @@ export class AddProductComponent implements OnInit{
   
   onSubmit(){
     this.product = this.productForm.value;
+    console.table(this.productForm.value);
     this.productService.addProduct(this.product).subscribe({
       next:(data:any)=>{alert("product added")
       this.productAdded.emit(data);

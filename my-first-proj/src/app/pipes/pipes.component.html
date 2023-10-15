@@ -1,0 +1,37 @@
+
+<!-- Assuming you have an Angular component with properties 'name', 'amount', and 'date' -->
+<div>
+    <h2>{{ name | uppercase }}</h2>
+    <!-- Uppercase pipe: Converts 'name' to uppercase -->
+  
+    <p>Amount: {{ amount | currency:'USD':true:'1.2-2' }}</p>
+    <!-- Currency pipe: Formats 'amount' as currency in USD with 2 decimal places -->
+  
+    <p>Date: {{ date | date:'shortDate' }}</p>
+    <!-- Date pipe: Formats 'date' in short date format (MM/DD/YYYY) -->
+  
+    <p>{{ amount | percent: '2.2-2' }}</p>
+    <!-- Percent pipe: Formats 'amount' as a percentage with 2 decimal places -->
+  
+    <p>{{ name | slice:2:5 }}</p>
+    <!-- Slice pipe: Extracts a substring of 'name' starting from index 2 and ending at index 5 -->
+  
+    <p>{{ name | titlecase }}</p>
+    <!-- Titlecase pipe: Converts 'name' to title case (capitalize each word) -->
+  </div>
+
+  <div>
+  <h2>Date Transformation</h2>
+    <p>Original Date: {{ dateString }}</p>
+    <p>Formatted Date: {{ dateString | date | uppercase }}</p>
+   </div>
+
+   <div>
+    <h2>Product List</h2>
+    <ul>
+      <li *ngFor="let product of products$ | async">
+        {{ product.description }}
+      </li>
+    </ul>
+  </div>
+  
