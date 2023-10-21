@@ -69,7 +69,7 @@ const numberObservable = new Observable<number>((observer) => {
 
   checkLogin(user:User):Observable<{ message: string, token: string}>{   
     //here we would make connection with the server using HttpClient
-    return this.http.post<{ message: string, token: string}>(this.url + '/login', user);
+    return this.http.post<{ message: string, token: string}>(this.url + '/loginWithRSA', user);
   }
 
   createNewUser(user:User):Observable<{message:string}>{

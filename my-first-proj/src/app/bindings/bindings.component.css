@@ -32,4 +32,11 @@
   .inactive{
     color:grey;
   }
+
+  /* my-component.component.css */
+.highlight {
+  background-color: yellow;
+  font-weight: bold;
+}
+
   

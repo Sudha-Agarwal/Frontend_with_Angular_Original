@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+const NodeRSA = require('node-rsa');
+const fs = require('fs');
 
 const app = express();
 const secretKey = '1234';
@@ -12,6 +14,18 @@ app.use(cors());
 
 app.use(bodyParser.json()); // Parse JSON request bodies
 
+
+/* RSA key pair generation using node-rsa  */
+
+
+// Generate an RSA key pair
+const key = new NodeRSA({ b: 2048 });
+
+// Save the private key to a file (keep it secure)
+fs.writeFileSync('private.pem', key.exportKey('private'));
+
+// Save the public key to a file (can be shared)
+fs.writeFileSync('public.pem', key.exportKey('public'));
 // Sample data for products
 const products = [
   { id: 1, name: 'Product 1', description: 'Description 1' ,category:"mobile"},
@@ -80,15 +94,39 @@ app.post('/login', (req, res) => {
   }
 });
 
+app.post('/loginWithRSA', (req, res) => {
+  const { email, password } = req.body;
+
+  // Find the user with the provided credentials
+  const user = users.find((user) => user.email === email && user.password === password);
+
+  if (user) {
+    // Create a payload object with user data
+    const privateKey = fs.readFileSync('private.pem', 'utf8');
+      const payload = {
+        email: user.email,
+        iat: Math.floor(Date.now() / 1000),
+        role: 'user',
+    };
+    const token = jwt.sign(payload, privateKey, { algorithm: 'RS256' });
+    res.status(200).json({ message: 'Login successful', token:token });
+  } else {
+    res.status(401).json({ message: 'Invalid credentials' });
+  }
+});
+
 // Middleware for authentication
 app.use((req, res, next) => {
   const token = req.header('Authorization');
   console.log(token);
+  const publicKey = fs.readFileSync('public.pem', 'utf8');
   if (!token) return res.status(401).send('Access denied. No token provided.');
 
   try {
-    const decoded = jwt.verify(token, secretKey);
+
+    const decoded = jwt.verify(token, publicKey, { algorithms: ['RS256']});
     req.user = decoded;
+    console.log("decoded" + decoded);
     next();
   } catch (ex) {
     res.status(400).send('Invalid token.');

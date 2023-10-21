@@ -27,3 +27,18 @@
       </div>
     </div>
   </div>
+
+  <!--ngClass-->
+  <!--<div [ngClass]="'my-class'">This will have the 'my-class' class</div>
+
+<div [ngClass]="['class1', 'class2']">This will have both 'class1' and 'class2' classes</div>
+
+<div [ngClass]="{'class1': condition, 'class2': anotherCondition}">Classes added conditionally</div>
+  -->
+<!--ngStyle-->
+<div [ngStyle]="{'color': 'red', 'font-size': '16px'}">This has inline styles</div>
+
+<div [ngStyle]="getStyle()">This will apply styles returned by the 'getStyle' function</div>
+<!-- my-component.component.html -->
+<div [ngClass]="{'highlight': isHighlighted}" [ngStyle]="getStyle()">Conditional class and style</div>
+<button (click)="toggleHighlight()">Toggle Highlight</button>

@@ -15,7 +15,7 @@
     </div>
     <div>
         <label for="category">Category:</label>
-        <select id="category" name="category">
+        <select id="category" name="category" formControlName="category">
           <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
         </select>
         <div *ngIf="productForm.get('category').invalid && productForm.get('category').touched">

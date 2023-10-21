@@ -50,6 +50,17 @@ export class BindingsComponent {
   hasError(){
     return true;
   }
+  isHighlighted = true;
 
+  getStyle() {
+    return {
+      'font-size': this.isHighlighted ? '20px' : '16px',
+      'color': this.isHighlighted ? 'red' : 'black'
+    };
+  }
+
+  toggleHighlight() {
+    this.isHighlighted = !this.isHighlighted;
+  }
 
 }
