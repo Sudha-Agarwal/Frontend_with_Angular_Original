@@ -1,5 +1,5 @@
 <button (click)="navigateToProducts()">Go to Products</button>
-
+<input [(ngModel)]="filterString" placeholder="Filter...">
 <h2>Product List</h2>
     <table>
       <thead>
@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products">
+        <tr *ngFor="let product of products | filter: filterString">
           <td>{{ product.id }}</td>
           <td>{{ product.name }}</td>
           <td>{{ product.description }}</td>

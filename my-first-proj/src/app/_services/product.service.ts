@@ -33,7 +33,7 @@ export class ProductService {
     this.headers= new HttpHeaders() 
     .set('content-type', 'application/json')
     .set('Access-Control-Allow-Origin', '*')
-    .set('Authorization', `${this.ds.getToken()}` ) ;
+    //.set('Authorization', `${this.ds.getToken()}` ) ;
     //alert(this.ds.getToken());  
     //this.headers.set( 'Authorization', `Bearer this.ds.getToken()}` );
       const params = new HttpParams().set("category", category);

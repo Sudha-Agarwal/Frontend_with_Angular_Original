@@ -11,6 +11,7 @@ import { PipesComponent } from './pipes/pipes.component';
 import { AllProductsListComponent } from './all-products-list/all-products-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { AnimationComponent } from './animation/animation.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: 'login-form', component:LoginFormComponent},
   {path: 'model-form', component:ModelFormComponent},
   {path: 'pipes', component: PipesComponent},
+  {path: 'animation', component:AnimationComponent},
   {path: '**', component:PageNotFoundComponent}
 ];
 

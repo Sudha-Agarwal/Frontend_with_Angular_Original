@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +14,7 @@ import { ModelFormComponent } from './model-form/model-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesComponent } from './pipes/pipes.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './child/child.component';
 import { ObservableComponent } from './observable/observable.component';
@@ -21,6 +22,9 @@ import { AllProductsListComponent } from './all-products-list/all-products-list.
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { AuthInterceptor } from './auth.interceptor';
+import { AnimationComponent } from './animation/animation.component';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -40,16 +44,25 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     AllProductsListComponent,
     PageNotFoundComponent,
     AddProductComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    AnimationComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
