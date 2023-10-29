@@ -1,0 +1,26 @@
+<!-- example.component.html -->
+
+<!-- Add Item Section -->
+<div>
+  <h2>Add Item</h2>
+  <form #itemForm="ngForm" (ngSubmit)="addItem(itemForm.value)">
+    <label for="itemName">Item Name:</label>
+    <input type="text" id="itemName" name="itemName" [(ngModel)]="newItemName" required>
+    <button type="submit" [disabled]="!itemForm.valid">Add Item</button>
+  </form>
+</div>
+
+<hr>
+
+<!-- Display Items Section -->
+<div>
+  <h2>Items</h2>
+  <ul>
+    <li *ngFor="let item of items">
+      <input type="text" [(ngModel)]="item.itemName" [disabled]="item.editing">
+      <button *ngIf="!item.editing" (click)="editItem(item)">Edit</button>
+      <button *ngIf="item.editing" (click)="updateItem(item)">Update</button>
+      <button (click)="deleteItem(item.id)">Delete</button>
+    </li>
+  </ul>
+</div>
